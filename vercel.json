@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/a",
+      "destination": "https://www.schafe-vorm-fenster.de/?etcc_cmp=Apple&etcc_med=Giveaway",
+      "permanent": true
+    }
+  ]
+}
