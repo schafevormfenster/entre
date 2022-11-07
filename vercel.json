@@ -1,14 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/a",
       "destination": "https://www.schafe-vorm-fenster.de/?etcc_cmp=Apple&etcc_med=Giveaway",
-      "permanent": true
+      "permanent": true,
+      "source": "/a"
     },
     {
-      "source": "/q/:community*",
-      "permanent": false,
-      "destination": "https://www.schafe-vorm-fenster.de/:community*?etcc_cmp=Flyer&etcc_med=Print"
+      "destination": "https://schafe-vorm-fenster.de/:community*?etcc_cmp=Flyer&etcc_med=Print",
+      "permanent": true,
+      "source": "/q/:community*"
     }
   ]
 }
