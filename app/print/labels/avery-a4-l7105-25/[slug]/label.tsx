@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { QRCode } from "react-qrcode-logo";
-// import { QRCode } from "react-qrcode-logo";
 
 const websiteDomain: string =
   process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || "schafe-vorm-fenster.de";

@@ -2,11 +2,7 @@
 module.exports = {
   content: [
     "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
   ],
-  purge: {
-    content: ['./app/**/*.tsx'],
-  },
   theme: {
     fontFamily: {
       body: ['Catamaran', 'Catamaran ExtraLight', 'Helvetica Neue', 'Arial', 'sans-serif'],
