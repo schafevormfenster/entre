@@ -4,6 +4,18 @@
       "source": "/a",
       "destination": "https://www.schafe-vorm-fenster.de/?etcc_cmp=Apple&etcc_med=Giveaway",
       "permanent": true
+    },
+    {
+      "source": "/q/:community*",
+      "has": [
+        {
+          "type": "query",
+          "key": "page",
+          "value": "home"
+        }
+      ],
+      "permanent": false,
+      "destination": "https://www.schafe-vorm-fenster.de/:community*?etcc_cmp=Flyer&etcc_med=Print"
     }
   ]
 }
