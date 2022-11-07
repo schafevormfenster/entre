@@ -6,6 +6,11 @@
       "source": "/a"
     },
     {
+      "destination": "https://www.schafe-vorm-fenster.de/?etcc_cmp=Flyer&etcc_med=Print",
+      "permanent": true,
+      "source": "/q/home"
+    },
+    {
       "destination": "https://schafe-vorm-fenster.de/:community*?etcc_cmp=Flyer&etcc_med=Print",
       "permanent": true,
       "source": "/q/:community*"
