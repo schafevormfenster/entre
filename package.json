@@ -1,7 +1,7 @@
 {
   "name": "entre",
   "description": "Tiny app to manage short url redirects and to provide according qr codes.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
