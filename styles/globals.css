@@ -1,0 +1,25 @@
+@import '~@fontsource/catamaran/index.css';
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+body {
+  @apply text-black;
+}
+
+#react-qrcode-logo {
+  margin: auto;
+}
+
+/* https://github.com/vercel/next.js/discussions/41745#discussioncomment-3973420 */
+[data-nextjs-scroll-focus-boundary] {
+  display: inline-block;
+}
