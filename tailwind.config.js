@@ -21,6 +21,7 @@ module.exports = {
         print: { raw: 'print' },
       },
       fontSize: {
+        's': '0.70rem',
         'xs': '0.45rem',
         'xxs': '0.35rem',
       },
@@ -33,6 +34,8 @@ module.exports = {
         '20mm': '20mm',
         '40mm': '40mm',
         '46mm': '46mm',
+        '2.5': '0.625rem',
+        '2.75': '0.6875rem',
       },
       height: {
         'a4': '297mm',
