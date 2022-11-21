@@ -20,11 +20,11 @@ export default function Label({ slug }: { slug: string }) {
         value={qrCodeUrl}
         fgColor="black"
         qrStyle="dots"
-        logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
-        removeQrCodeBehindLogo={true}
-        ecLevel="Q"
-        logoHeight={20}
-        logoWidth={20}
+        // logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
+        // removeQrCodeBehindLogo={true}
+        ecLevel="M"
+        // logoHeight={20}
+        // logoWidth={20}
         eyeRadius={[
           {
             // top/left eye
@@ -44,10 +44,10 @@ export default function Label({ slug }: { slug: string }) {
         ]}
         eyeColor="#222"
       />
-      <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
+      {/* <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
         {websiteDomain}
-      </p>
-      <p className="absolute block w-full text-xs leading-tight text-center text-black bottom-3.5 font-title">
+      </p> */}
+      <p className="absolute block w-full leading-none text-center text-black text-s bottom-3 font-title">
         {slug}
       </p>
     </div>
