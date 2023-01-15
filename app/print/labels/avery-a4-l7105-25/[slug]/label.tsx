@@ -14,7 +14,7 @@ export default function Label({ slug }: { slug: string }) {
   const qrCodeUrl: string = qrCodeBaseUrl + qrCodeBasePath + slug;
 
   return (
-    <div className="relative block pt-5 h-40mm w-40mm">
+    <div className="relative block pt-5 text-center h-40mm w-40mm">
       <QRCode
         size={95}
         value={qrCodeUrl}
@@ -47,9 +47,11 @@ export default function Label({ slug }: { slug: string }) {
       {/* <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
         {websiteDomain}
       </p> */}
-      <p className="absolute block w-full leading-none text-center text-black text-s bottom-3 font-title">
-        {slug}
-      </p>
+      <div className="absolute block w-full text-center top-34mm">
+        <p className="relative block w-2/3 mx-auto leading-none text-center text-black whitespace-normal text-s font-title">
+          {slug.replaceAll("-", "‐")}
+        </p>
+      </div>
     </div>
   );
 }
