@@ -9,6 +9,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@fontsource/catamaran": "^4.5.9",
     "eslint": "8.26.0",
