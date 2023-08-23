@@ -35,6 +35,7 @@ module.exports = {
         '25mm': '25mm',
         '30mm': '30mm',
         '34mm': '34mm',
+        '34.5mm': '34.5mm',
         '35mm': '35mm',
         '40mm': '40mm',
         '45mm': '45.5mm',
