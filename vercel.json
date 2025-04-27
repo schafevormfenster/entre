@@ -16,7 +16,7 @@
       "source": "/q/:community*"
     },
     {
-      "destination": "https://gemeinde-schmatzin.de/",
+      "destination": "https://www.gemeinde-schmatzin.de/",
       "permanent": true,
       "source": "/c/gs"
     }
