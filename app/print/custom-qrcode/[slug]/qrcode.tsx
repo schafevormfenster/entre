@@ -44,30 +44,12 @@ export default function QrCodeImage({ slug }: { slug: string }) {
           size={900}
           value={qrCodeUrl}
           fgColor="black"
-          qrStyle="dots"
-          logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
+          qrStyle="squares"
           removeQrCodeBehindLogo={true}
           ecLevel="Q"
           logoHeight={200}
-          logoWidth={200}
-          eyeRadius={[
-            {
-              // top/left eye
-              outer: [10, 3, 3, 3],
-              inner: [5, 5, 5, 5],
-            },
-            {
-              // top/right eye
-              outer: [3, 10, 3, 3],
-              inner: [5, 5, 5, 5],
-            },
-            {
-              // bottom/left
-              outer: [3, 3, 3, 10],
-              inner: [5, 5, 5, 5],
-            },
-          ]}
-          eyeColor="#222"
+          logoWidth={200}          
+          eyeColor="#000"
         />
       </button>
     </div>
