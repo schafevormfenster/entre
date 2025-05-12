@@ -1,0 +1,87 @@
+import { NextRequest, NextResponse } from "next/server";
+import { generatePDF } from "./pdf-generator";
+
+
+export const dynamic = "force-dynamic";
+
+// Handle GET request to generate PDF
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Record<string, string> }
+) {
+
+    console.log("Generating PDF for params:", params);
+
+  try {
+    // Get community name and slug from query parameters
+    const searchParams = request.nextUrl.searchParams;
+    const communityName = searchParams.get("community") || "Musterort";
+    const slug = searchParams.get("slug") || "default";
+
+    // Generate sample events if not provided (for demonstration)
+    const events = generateSampleEvents();
+
+    // Generate PDF as buffer
+    const pdfBuffer = await generatePDF({
+      communityName,
+      slug,
+      events,
+    });
+
+    // Return PDF as response
+    return new NextResponse(pdfBuffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `inline; filename="showcase-poster-${slug}.pdf"`,
+      },
+    });
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    return new NextResponse(
+      JSON.stringify({ error: "Failed to generate PDF" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+}
+
+// Function to generate sample events for demonstration
+function generateSampleEvents() {
+  return [
+    {
+      date: "2025-05-15",
+      time: "19:00",
+      title: "Dorfmusik-Probe",
+      location: "Gemeindehaus",
+    },
+    {
+      date: "2025-05-18",
+      time: "10:00",
+      title: "Sonntags-Brunch",
+      location: "Dorfcafé",
+    },
+    {
+      date: "2025-05-20",
+      time: "15:30",
+      title: "Seniorennachmittag",
+      location: "Gemeindehaus",
+    },
+    {
+      date: "2025-05-25",
+      time: "14:00",
+      title: "Spielplatzfest",
+      location: "Dorfplatz",
+    },
+    {
+      date: "2025-06-01",
+      time: "09:00",
+      title: "Freiwilliger Arbeitseinsatz",
+      location: "Treffpunkt Feuerwehrhaus",
+    },
+  ];
+}

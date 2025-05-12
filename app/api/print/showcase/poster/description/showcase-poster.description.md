@@ -104,3 +104,4 @@ Smartphone canvas SVG:
 * **Framework Integration:** Implemented as an API route within a Next.js 13 application.
 * **API Route Path:** `/api/print/showcase/poster`
 * **Font Source:** Utilizes Google Fonts for the Catamaran font family.
+* **Package manager:** Uses `yarn` for package management.
