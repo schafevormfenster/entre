@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
 import React from "react";
 import { View, Text, StyleSheet, Image } from "@react-pdf/renderer";
 import path from "path";
@@ -6,26 +7,23 @@ import fs from "fs";
 // Define styles for the QR code section
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80,
+    marginTop: 20,
     marginBottom: 30,
+    flexDirection: "row",
     alignItems: "center",
   },
   qrCode: {
-    width: 120,
-    height: 120,
-    marginBottom: 10,
+    width: 70,
+    height: 70,
+    marginRight: 10,
+  },
+  textContainer: {
+    flex: 1,
   },
   scanText: {
-    fontSize: 12,
-    textAlign: "center",
-    marginBottom: 5,
+    fontSize: 8,
+    textAlign: "left",
     fontFamily: "Catamaran",
-  },
-  urlText: {
-    fontSize: 10,
-    textAlign: "center",
-    fontFamily: "Catamaran",
-    fontWeight: 600,
   },
 });
 
@@ -60,8 +58,11 @@ export const QrCodeSection: React.FC<QrCodeSectionProps> = ({ slug }) => {
           style={styles.qrCode}
         />
       )}
-      <Text style={styles.scanText}>QR-Code scannen und alle Termine sehen</Text>
-      <Text style={styles.urlText}>{qrCodeUrl}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.scanText}>QR-Code scannen und alle</Text>
+        <Text style={styles.scanText}>Termine sehen</Text>
+        <Text style={styles.scanText}>{qrCodeUrl}</Text>
+      </View>
     </View>
   );
 };

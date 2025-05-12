@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
 import React from "react";
 import { View, StyleSheet, Image, Text } from "@react-pdf/renderer";
 import path from "path";
@@ -10,9 +11,9 @@ import { formatEventDate } from "../utils";
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    width: 300,
-    height: 345,
-    marginTop: 30,
+    width: 260,
+    height: 545,
+    marginTop: 0,
   },
   smartphone: {
     width: "100%",
@@ -41,12 +42,12 @@ const styles = StyleSheet.create({
   },
   content: {
     position: "absolute",
-    top: 58,
-    left: 55,
-    right: 55,
-    bottom: 35,
+    top: 65,
+    left: 25,
+    right: 25,
+    bottom: 25,
     backgroundColor: "#ffffff",
-    padding: 10,
+    padding: 0,
   },
   eventItem: {
     marginBottom: 12,
@@ -81,8 +82,8 @@ interface SmartphoneContentProps {
  * Component displaying the smartphone mockup with events
  */
 export const SmartphoneContent: React.FC<SmartphoneContentProps> = ({ events }) => {
-  // Load smartphone SVG
-  const svgPath = path.join(
+  // Load smartphone PNG for better PDF compatibility
+  const smartphonePath = path.join(
     process.cwd(),
     "app",
     "api",
@@ -90,14 +91,14 @@ export const SmartphoneContent: React.FC<SmartphoneContentProps> = ({ events }) 
     "showcase",
     "poster",
     "description",
-    "smartphone-canvas.svg"
+    "smartphone-canvas.png"
   );
   
-  let svgContent = "";
+  let phoneImageBase64 = "";
   let logoBase64 = "";
   
   try {
-    svgContent = fs.readFileSync(svgPath).toString("base64");
+    phoneImageBase64 = fs.readFileSync(smartphonePath).toString("base64");
     
     // Load logo
     const logoPath = path.join(process.cwd(), "public", "Schafe-vorm-Fenster-UG_Logo.png");
@@ -109,9 +110,9 @@ export const SmartphoneContent: React.FC<SmartphoneContentProps> = ({ events }) 
   return (
     <View style={styles.container}>
       {/* Smartphone frame */}
-      {svgContent && (
+      {phoneImageBase64 && (
         <Image 
-          src={`data:image/svg+xml;base64,${svgContent}`}
+          src={`data:image/png;base64,${phoneImageBase64}`}
           style={styles.smartphone}
         />
       )}

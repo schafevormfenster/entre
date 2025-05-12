@@ -6,17 +6,16 @@ export const dynamic = "force-dynamic";
 
 // Handle GET request to generate PDF
 export async function GET(
-  request: NextRequest,
-  { params }: { params: Record<string, string> }
+  request: NextRequest
 ) {
 
-    console.log("Generating PDF for params:", params);
+    console.log("Generating PDF...");
 
   try {
     // Get community name and slug from query parameters
     const searchParams = request.nextUrl.searchParams;
-    const communityName = searchParams.get("community") || "Musterort";
-    const slug = searchParams.get("slug") || "default";
+    const communityName: string = searchParams.get("community") || "Musterort";
+    const slug: string = searchParams.get("slug") || "default";
 
     // Generate sample events if not provided (for demonstration)
     const events = generateSampleEvents();

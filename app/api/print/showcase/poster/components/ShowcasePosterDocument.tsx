@@ -7,22 +7,21 @@ import { SmartphoneContent } from "./SmartphoneContent";
 import { PartnerLogo } from "./PartnerLogo";
 import { QrCodeSection } from "./QrCodeSection";
 import { InformationText } from "./InformationText";
+import path from "path"; // Add path import for file resolution
 
-
-// Register fonts
+// Register fonts with local paths
 Font.register({
   family: "Catamaran",
   fonts: [
-    { src: "https://fonts.gstatic.com/s/catamaran/v18/o-0IIpQoyXQa2RxT7-5r8zRAW_0.ttf", fontWeight: 300 }, // Light
-    { src: "https://fonts.gstatic.com/s/catamaran/v18/o-0IIpQoyXQa2RxT7-5r6zRAW_0.ttf", fontWeight: 400 }, // Regular
-    { src: "https://fonts.gstatic.com/s/catamaran/v18/o-0IIpQoyXQa2RxT7-5r5zRAW_0.ttf", fontWeight: 500 }, // Medium
-    { src: "https://fonts.gstatic.com/s/catamaran/v18/o-0IIpQoyXQa2RxT7-5r4zRAW_0.ttf", fontWeight: 600 }, // SemiBold
+    { src: path.join(process.cwd(), "node_modules/@fontsource/catamaran/files/catamaran-latin-400-normal.woff"), fontWeight: 400 }, // Regular
+    { src: path.join(process.cwd(), "node_modules/@fontsource/catamaran/files/catamaran-latin-600-normal.woff"), fontWeight: 600 }, // SemiBold
   ],
 });
 
+// Use standard fonts for Courier New
 Font.register({
   family: "Courier New",
-  src: "https://fonts.gstatic.com/s/courierprime/v9/u-450q2lgwslOqpF_6gQ8kELawRpX837pvjxPA.ttf"
+  src: path.join(process.cwd(), "public/fonts/courier-new.ttf")
 });
 
 // Define styles for the document
@@ -30,23 +29,37 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "white",
-    padding: 30,
+    padding: 50,
+    paddingBottom: 10,
     fontFamily: "Catamaran",
+    
   },
-  leftColumn: {
-    width: "65%",
+  topRow: {
+    flexDirection: "row",
+    height: "28%", // 1/3 of the page
+    marginBottom: 20,
+  },
+  topRowLeft: {
+    flex: 1,
     paddingRight: 15,
   },
-  rightColumn: {
-    width: "35%",
-    position: "absolute",
-    right: 30,
-    top: 30,
-    bottom: 30,
+  topRowRight: {
+    width: 120, // Fixed width for the partner logo
+    alignItems: "flex-end",
   },
-  container: {
+  mainContent: {
     flexDirection: "row",
     flex: 1,
+    maxHeight: "66%", // 2/3 of the page
+  },
+  leftColumn: {
+    width: "60%",
+    paddingRight: 15,
+    
+  },
+  rightColumn: {
+    width: "40%",
+    
   },
 });
 
@@ -67,17 +80,26 @@ export const ShowcasePosterDocument: React.FC<ShowcasePosterDocumentProps> = ({
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.container}>
-          {/* Left column */}
-          <View style={styles.leftColumn}>
+        {/* Top Row with Header, Community Name and Partner Logo */}
+        <View style={styles.topRow}>
+          <View style={styles.topRowLeft}>
             <Header />
             <CommunityName name={communityName} />
+          </View>
+          <View style={styles.topRowRight}>
+            <PartnerLogo />
+          </View>
+        </View>
+        
+        {/* Main Content - Two Columns */}
+        <View style={styles.mainContent}>
+          {/* Left column with smartphone */}
+          <View style={styles.leftColumn}>
             <SmartphoneContent events={events} />
           </View>
 
-          {/* Right column */}
+          {/* Right column with QR code and information */}
           <View style={styles.rightColumn}>
-            <PartnerLogo />
             <QrCodeSection slug={slug} />
             <InformationText />
           </View>

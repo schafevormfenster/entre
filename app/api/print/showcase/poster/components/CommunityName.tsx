@@ -1,6 +1,10 @@
 import React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
 
+// Disable the ESLint rule '@next/next/no-html-link-for-pages' for this file as it's not a Next.js page component.
+
+/* eslint-disable @next/next/no-html-link-for-pages */
+
 // Define styles for the community name
 const styles = StyleSheet.create({
   communityName: {
@@ -14,6 +18,10 @@ const styles = StyleSheet.create({
   longName: {
     fontSize: 36,
   },
+  multiLine: {
+    fontSize: 64,
+    lineHeight: 1.2,
+  },
 });
 
 interface CommunityNameProps {
@@ -24,16 +32,62 @@ interface CommunityNameProps {
  * Component displaying the community name with dynamic font sizing
  */
 export const CommunityName: React.FC<CommunityNameProps> = ({ name }) => {
-  // Determine if we should use the smaller font size
-  // Use smaller font size for names longer than 12 characters or containing spaces
-  const isLongName = name.length > 12 || name.includes(' ');
+  // Process the community name based on different conditions
+  
+  // Short name (up to 7 characters): Use large font size
+  const isShortName = name.length <= 7 && !name.includes(' ') && !name.includes('-');
+  
+  // Name with hyphen: Split on hyphen and display on two lines
+  const hasHyphen = name.includes('-');
+  
+  // Name with spaces: Split on first space and display on two lines
+  const hasSpaces = name.includes(' ');
+  
+  // Determine how to render the community name
+  let content: React.ReactNode;
+  let styleToUse: any;
+  
+  if (isShortName) {
+    // Short name: Just render as is with large font
+    content = name;
+    styleToUse = styles.shortName;
+  } else if (hasHyphen) {
+    // Name with hyphen: Split on hyphen and format with line breaks
+    const parts = name.split('-');
+    content = (
+      <>
+        {parts[0].trim()}-
+        {'\n'}
+        {parts.slice(1).join('-').trim()}
+      </>
+    );
+    styleToUse = styles.multiLine;
+  } else if (hasSpaces) {
+    // Name with space(s): Split on first space for two-line format
+    const firstSpaceIndex = name.indexOf(' ');
+    const firstLine = name.substring(0, firstSpaceIndex);
+    const secondLine = name.substring(firstSpaceIndex + 1);
+    
+    content = (
+      <>
+        {firstLine}
+        {'\n'}
+        {secondLine}
+      </>
+    );
+    styleToUse = styles.multiLine;
+  } else {
+    // Other long names: Use smaller font size
+    content = name;
+    styleToUse = styles.longName;
+  }
   
   return (
     <Text style={[
       styles.communityName,
-      isLongName ? styles.longName : styles.shortName
+      styleToUse
     ]}>
-      {name}
+      {content}
     </Text>
   );
 };
