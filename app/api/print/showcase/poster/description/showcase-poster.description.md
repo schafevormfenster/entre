@@ -58,13 +58,9 @@ This poster is generated as a PDF document by a Next.js 13 API route utilizing t
 
 ### Handling of Dynamic Parts
 
-1.  **Community Name:** The layout adapts to the length of the name. Short names (*"Güst"*) appear on one line. Longer names (*"Torgelow-Holländerei"*) wrap onto a second line. This wrapping pushes the smartphone mockup slightly lower on the page, but the overall structure remains intact.
+1.  **Community Name:** The layout adapts to the length of the name. Short names (*"Güst"*) appear on one line with larger font size. Longer names (*"Torgelow-Holländerei"*) wrap onto a second line with a smaller font size. This wrapping pushes the smartphone mockup slightly lower on the page, but the overall structure remains intact.
 2.  **Smartphone Event List:** The content *inside* the smartphone screen is dynamic, displaying events relevant to the specific community featured on the poster. The list format (date, time, title, location) remains consistent.
 3.  **QR Code:** This is dynamic and unique for each community, presumably linking to their specific online calendar or information source referenced by the poster.
-
-
-
-
 
 ## Resources
 
