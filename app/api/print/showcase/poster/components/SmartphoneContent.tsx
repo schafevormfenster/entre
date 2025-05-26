@@ -4,6 +4,7 @@ import { View, StyleSheet, Image, Text, Svg, Path } from "@react-pdf/renderer";
 import path from "path";
 import fs from "fs";
 import { Event } from "../types";
+import { PRIMARY_FONT } from "./fonts";
 import {
   formatEventDate,
   getWeekday,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 8,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
   },
   list: {
     flex: 0,
@@ -75,25 +76,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 7,
     lineHeight: 0.8,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
   },
 
   dateText: {
     textAlign: "center",
     fontSize: 15,
     lineHeight: 1.1,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     fontWeight: 700,
     marginBottom: 2,
   },
   eventDetails: {
     flexDirection: "column",
     fontSize: 10,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
   },
   eventTitle: {
     fontSize: 13,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     fontWeight: 500,
     width: "160",
     lineHeight: 1.2,

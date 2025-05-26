@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "app/api/print/showcase/poster/route.ts": {
+      "maxDuration": 60
+    }
+  },
   "redirects": [
     {
       "destination": "https://www.schafe-vorm-fenster.de/?etcc_cmp=Apple&etcc_med=Giveaway",

@@ -13,31 +13,38 @@ export async function GET(
 ) {
 
   console.log("Generating PDF...");
+  const startTime = Date.now();
 
   try {
     // Get community name and slug from query parameters
     const searchParams = request.nextUrl.searchParams;
     const slug: string = searchParams.get("slug") || "default";
 
+    // Fetch community and events in parallel for better performance
+    console.log(`Fetching data for slug: ${slug}`);
+    const [community, events] = await Promise.all([
+      getGeoLocation(slug),
+      getEventsByCommunity(slug)
+    ]);
 
-    //  get community name by slug from geo api
-    const community: GeoLocation | null = await getGeoLocation(slug);
     if (!community) {
       console.error(`Community with slug "${slug}" not found.`);
       throw new Error(`Community with slug "${slug}" not found.`);
     }
-    // Get events from sanity using the new function
+
+    console.log(`Data fetched in ${Date.now() - startTime}ms`);
     console.log(`Generating PDF for community: ${community.name} (slug: ${slug})`);
 
-    // Fetch real events from Sanity
-    const events = await getEventsByCommunity(slug);
-
     // Generate PDF as buffer
+    const pdfStartTime = Date.now();
     const pdfBuffer = await generatePDF({
       community: community.name as string,
       slug,
       events,
     });
+    
+    console.log(`PDF generated in ${Date.now() - pdfStartTime}ms`);
+    console.log(`Total processing time: ${Date.now() - startTime}ms`);
 
     // Return PDF as response
     return new NextResponse(pdfBuffer, {
@@ -45,6 +52,7 @@ export async function GET(
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `inline; filename="showcase-poster-${slug}.pdf"`,
+        "Cache-Control": "public, max-age=300", // Cache for 5 minutes
       },
     });
   } catch (error) {

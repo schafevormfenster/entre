@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
+import { PRIMARY_FONT } from "./fonts";
 
 // Disable the ESLint rule '@next/next/no-html-link-for-pages' for this file as it's not a Next.js page component.
 
@@ -8,7 +9,7 @@ import { Text, StyleSheet } from "@react-pdf/renderer";
 // Define styles for the community name
 const styles = StyleSheet.create({
   communityName: {
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     fontWeight: 600,
     marginBottom: 10,
     lineHeight: 1.1,

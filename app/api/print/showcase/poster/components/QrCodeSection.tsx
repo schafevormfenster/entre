@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "@react-pdf/renderer";
 import QrCode from "./qr-code";
 import { CommunityProps } from "./ShowcasePosterDocument";
+import { PRIMARY_FONT } from "./fonts";
 
 // Define styles for the QR code section
 const styles = StyleSheet.create({
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
   scanText: {
     fontSize: 10,
     textAlign: "left",
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     paddingLeft: 3,
     marginTop:2,
     lineHeight: 1.3

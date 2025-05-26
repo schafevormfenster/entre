@@ -2,6 +2,7 @@ import React from "react";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { CommunityProps, ShowcasePosterDocument } from "./components/ShowcasePosterDocument";
 import { Event } from "./types";
+import "./components/fonts"; // Import fonts configuration to ensure registration
 
 
 interface GeneratePDFProps extends CommunityProps {

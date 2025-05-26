@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { CommunityProps } from "./ShowcasePosterDocument";
+import { PRIMARY_FONT } from "./fonts";
 
 // Define styles for the information text section
 const styles = StyleSheet.create({
@@ -11,14 +12,14 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 15,
     marginBottom: 5,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     fontWeight: 500,
     lineHeight: 1.3
   },
   text: {
     fontSize: 11,
     marginBottom: 8,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     hyphens: "none",
     lineHeight: 1.3
   },

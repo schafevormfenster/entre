@@ -1,5 +1,5 @@
 import React from "react";
-import { Document, Page, StyleSheet, Font, View } from "@react-pdf/renderer";
+import { Document, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { Event } from "../types";
 import { Header } from "./Header";
 import { CommunityName } from "./CommunityName";
@@ -7,36 +7,7 @@ import { SmartphoneContent } from "./SmartphoneContent";
 import { PartnerLogo } from "./PartnerLogo";
 import { QrCodeSection } from "./QrCodeSection";
 import { InformationText } from "./InformationText";
-import path from "path"; // Add path import for file resolution
-
-// Register fonts with local paths
-Font.register({
-  family: "Catamaran",
-  fonts: [
-    {
-      src: path.join(process.cwd(), "public/fonts/catamaran-400.woff"),
-      fontWeight: 400,
-    }, // Regular
-    {
-      src: path.join(process.cwd(), "public/fonts/catamaran-500.woff"),
-      fontWeight: 500,
-    }, // Medium
-    {
-      src: path.join(process.cwd(), "public/fonts/catamaran-600.woff"),
-      fontWeight: 600,
-    }, // SemiBold
-    {
-      src: path.join(process.cwd(), "public/fonts/catamaran-700.woff"),
-      fontWeight: 700,
-    }, // Bold
-  ],
-});
-
-// Use standard fonts for Courier New
-Font.register({
-  family: "Courier New",
-  src: path.join(process.cwd(), "public/fonts/courier-new.ttf"),
-});
+import { PRIMARY_FONT } from "./fonts"; // Import fonts configuration
 
 // Define styles for the document
 const styles = StyleSheet.create({
@@ -46,7 +17,7 @@ const styles = StyleSheet.create({
     padding: 60,
     paddingTop: 20,
     paddingBottom: 10,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
   },
   topRow: {
     flexDirection: "row",

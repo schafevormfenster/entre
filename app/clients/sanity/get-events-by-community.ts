@@ -254,7 +254,7 @@ const fetchEventsByCommunityList = async (
     const eventsScopeQueryPart: string =
         'calendar->scope in [' + scopes.map(scope => `"${scopeId(scope).toString()}"`).join(',') + ']';
 
-    const query = `*[_type == "event" && (${communitiesMatchQueryPart}) && !cancelled && ${eventsScopeQueryPart}]{ ${EventDTOdetailQueryFields} }`;
+    const query = `*[_type == "event" && (${communitiesMatchQueryPart}) && !cancelled && ${eventsScopeQueryPart} && start >= now()] | order(start asc) [0...20] { ${EventDTOdetailQueryFields} }`;
     const queryParams = {};
 
     try {

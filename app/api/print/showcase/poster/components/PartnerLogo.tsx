@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "@react-pdf/renderer";
 import path from "path";
 import fs from "fs";
+import { PRIMARY_FONT } from "./fonts";
 
 // Define styles for the partner logo section
 const styles = StyleSheet.create({
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingRight:10,
     paddingTop:2,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     textAlign : "right",
     lineHeight: 1.3
     

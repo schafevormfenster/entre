@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
+import { PRIMARY_FONT } from "./fonts";
 
 // Define styles for the header
 const styles = StyleSheet.create({
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     paddingTop:35,
     marginBottom: -7,
-    fontFamily: "Catamaran",
+    fontFamily: PRIMARY_FONT,
     fontWeight: 500,
   },
 });
