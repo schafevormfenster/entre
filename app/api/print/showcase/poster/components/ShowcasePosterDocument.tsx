@@ -14,31 +14,19 @@ Font.register({
   family: "Catamaran",
   fonts: [
     {
-      src: path.join(
-        process.cwd(),
-        "node_modules/@fontsource/catamaran/files/catamaran-latin-400-normal.woff"
-      ),
+      src: path.join(process.cwd(), "public/fonts/catamaran-400.woff"),
       fontWeight: 400,
     }, // Regular
     {
-      src: path.join(
-        process.cwd(),
-        "node_modules/@fontsource/catamaran/files/catamaran-latin-500-normal.woff"
-      ),
+      src: path.join(process.cwd(), "public/fonts/catamaran-500.woff"),
       fontWeight: 500,
     }, // Medium
     {
-      src: path.join(
-        process.cwd(),
-        "node_modules/@fontsource/catamaran/files/catamaran-latin-600-normal.woff"
-      ),
+      src: path.join(process.cwd(), "public/fonts/catamaran-600.woff"),
       fontWeight: 600,
     }, // SemiBold
     {
-      src: path.join(
-        process.cwd(),
-        "node_modules/@fontsource/catamaran/files/catamaran-latin-700-normal.woff"
-      ),
+      src: path.join(process.cwd(), "public/fonts/catamaran-700.woff"),
       fontWeight: 700,
     }, // Bold
   ],

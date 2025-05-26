@@ -52,7 +52,7 @@ export default async function Homepage() {
             <p className="text-sm">
               Showcase poster with QR code and community name
             </p>
-            <Link href={`/api/print/showcase/poster/?slug=schlatko&community=Schlatkow`} className="text-sm">
+            <Link href={`/api/print/showcase/poster/?slug=schlatkow`} className="text-sm">
               {`/print/showcase/poster/`}
               <span className="text-red-500">{`[community slug]`}</span>
             </Link>
