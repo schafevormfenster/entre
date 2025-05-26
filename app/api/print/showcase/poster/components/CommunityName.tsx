@@ -17,10 +17,13 @@ const styles = StyleSheet.create({
     fontSize: 140,
   },
   longName: {
+    fontSize: 100,
+    paddingTop: 20,
+  },
+  longerName: {
     fontSize: 80,
     paddingTop: 20,
   },
-
   multiLine: {
     fontSize: 80,
   },
@@ -78,9 +81,12 @@ export const CommunityName: React.FC<CommunityNameProps> = ({ name }) => {
       </>
     );
     styleToUse = styles.multiLine;
-  } else if (name.length >= 8 && name.length <= 11) {
+  } else if (name.length >= 8 && name.length <= 9) {
     content = name;
     styleToUse = styles.longName;
+  } else if (name.length >= 10 && name.length <= 11) {
+    content = name;
+    styleToUse = styles.longerName;
   } else {
     // Other long names: Use smaller font size
     content = name;

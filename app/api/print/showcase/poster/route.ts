@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generatePDF } from "./pdf-generator";
+import { getGeoLocation } from "../../../../clients/geo-api/get-geo-location";
+import { GeoLocation } from "../../../../clients/geo-api/types/geo-location.types";
 
 
 export const dynamic = "force-dynamic";
@@ -9,25 +11,30 @@ export async function GET(
   request: NextRequest
 ) {
 
-    console.log("Generating PDF...");
+  console.log("Generating PDF...");
 
   try {
     // Get community name and slug from query parameters
     const searchParams = request.nextUrl.searchParams;
-    const communityName: string = searchParams.get("community") || "Musterort";
     const slug: string = searchParams.get("slug") || "default";
 
 
-// TODO: get copmmunity name by slug from geo api
-// TODO: get events from sanity
+    //  get community name by slug from geo api
+    const community: GeoLocation | null = await getGeoLocation(slug);
+    if (!community) {
+      console.error(`Community with slug "${slug}" not found.`);
+      throw new Error(`Community with slug "${slug}" not found.`);
+    }
+    // TODO: get events from sanity
 
+    console.log(`Generating PDF for community: ${community.name} (slug: ${slug})`);
 
     // Generate sample events if not provided (for demonstration)
     const events = generateSampleEvents();
 
     // Generate PDF as buffer
     const pdfBuffer = await generatePDF({
-      community: communityName,
+      community: community.name as string,
       slug,
       events,
     });

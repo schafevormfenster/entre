@@ -1,34 +1,28 @@
 import { View, Image } from "@react-pdf/renderer";
-import { error } from "console";
-import path from "path";
 
 interface QrCodeProps {
   url: string;
   size?: number;
 }
 
-// Pre-generate a QR code image
+// Generate a QR code as data URL synchronously using qr-image
 const generateQRCodeSync = (url: string) => {
-  // We need to generate QR codes synchronously for React PDF
   try {
-    // Generate a temporary file path for our QR code
-    const tempFilePath = path.join(process.cwd(), "temp-qr-code.png");
+    const qrImage = require("qr-image");
     
-    // Use the canvas library to generate a QR code synchronously
-    const { createCanvas } = require("canvas");
-    const QRCode = require("qrcode");
-    
-    // Create a canvas and render the QR code
-    const canvas = createCanvas(200, 200);
-    QRCode.toCanvas(canvas, url, {
-      width: 200,
+    // Generate QR code as PNG buffer synchronously
+    const qrPng = qrImage.imageSync(url, {
+      type: 'png',
+      size: 10,
       margin: 1,
-      color: { dark: '#000000', light: '#ffffff' },
-      errorCorrectionLevel: 'Q',
+      'parse_url': false
     });
     
-    // Convert the canvas to a data URL
-    return canvas.toDataURL("image/png");
+    // Convert buffer to data URL
+    const base64 = qrPng.toString('base64');
+    const dataUrl = `data:image/png;base64,${base64}`;
+    
+    return dataUrl;
   } catch (error) {
     console.error("Failed to generate QR code:", error);
     throw new Error("QR code generation failed");
