@@ -1,65 +1,59 @@
 import React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
+import { CommunityProps } from "./ShowcasePosterDocument";
 
 // Define styles for the information text section
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-        
-
+    paddingLeft: 3,
   },
   heading: {
-    fontSize: 14,
+    fontSize: 15,
     marginBottom: 5,
     fontFamily: "Catamaran",
-    fontWeight: 600,
-  },
-  subheading: {
-    fontSize: 12,
-    marginTop: 10,
-    marginBottom: 3,
-    fontFamily: "Catamaran",
     fontWeight: 500,
+    lineHeight: 1.3
   },
   text: {
-    fontSize: 10,
+    fontSize: 11,
     marginBottom: 8,
     fontFamily: "Catamaran",
-  },
-  contactInfo: {
-    fontSize: 10,
-    marginBottom: 0,
-    fontFamily: "Catamaran",
+    hyphens: "none",
+    lineHeight: 1.3
   },
 });
 
 /**
  * Component displaying the information text section
  */
-export const InformationText: React.FC = () => {
+export const InformationText: React.FC<CommunityProps> = ({ community }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Deine Termine fehlen?</Text>
-      <Text style={styles.text}>
-        Trag deine Veranstaltung einfach ins digitale Schafe vorm Fenster-Dorfleben ein.
+      <Text style={styles.text}>Deine Termine fehlen?</Text>
+
+      <Text style={styles.heading}>
+        Mach&apos; das Dorfleben sichtbar.{"\n"}
+        So erfährt jeder was wann wo {"\n"}
+        in {community} los ist.{"\n"}
       </Text>
 
-      <Text style={styles.heading}>Mach&apos; das Dorfleben sichtbar.</Text>
       <Text style={styles.text}>
-        Nutze die Online-Plattform Schafe vorm Fenster für alle Termine, Treffpunkte und Vereine in deinem Ort.
+        {"\n"}So einfach geht&apos;s:{"\n"}
+      </Text>
+      <Text style={styles.text}>
+        Schreibe deine Termine in einen Google {"\n"}Kalender. Melde dich
+        einmalig an. Und deine Termine erscheinen immer aktuell {"\n"}in deinem
+        Dorfkalender.{"\n"}
+        {"\n\n"}
       </Text>
 
-      <Text style={styles.subheading}>So einfach geht es:</Text>
+      <Text style={styles.text}>Mehr Infos:</Text>
       <Text style={styles.text}>
-        1. Melde dich kostenlos an{"\n"}
-        2. Erstelle deinen Termin{"\n"}
-        3. Fertig - dein Termin erscheint automatisch auf dieser Liste
+        www.schafe-vorm-fenster.de{"\n"}
+        0156.78204630{"\n"}
+        jan@schafe-vorm-fenster.de
       </Text>
-
-      <Text style={styles.subheading}>Mehr Infos:</Text>
-      <Text style={styles.contactInfo}>www.schafe-vorm-fenster.de</Text>
-      <Text style={styles.contactInfo}>Telefon: 03831 / 293 381</Text>
-      <Text style={styles.contactInfo}>info@schafe-vorm-fenster.de</Text>
     </View>
   );
 };

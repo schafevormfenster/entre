@@ -7,19 +7,25 @@ import fs from "fs";
 // Define styles for the partner logo section
 const styles = StyleSheet.create({
   container: {
-    alignItems: "flex-end",
+    alignItems: "flex-start",
+        flexDirection: "row",
   },
   kooperationText: {
-    fontSize: 8,
+    fontSize: 10,
     marginBottom: 5,
+    paddingRight:10,
+    paddingTop:2,
     fontFamily: "Catamaran",
+    textAlign : "right",
+    lineHeight: 1.1,
+    
   },
   logoContainer: {
-    width: 120,
+    width: 60,
   },
   logo: {
-    width: "100%",
-    height: 30,
+    width: 60,
+    height: 60,
     objectFit: "contain",
   },
 });
@@ -49,7 +55,7 @@ export const PartnerLogo: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.kooperationText}>in Kooperation mit dem</Text>
+      <Text style={styles.kooperationText}>in Kooperation{"\n"}mit dem</Text>
       <View style={styles.logoContainer}>
         {logoBase64 && (
           <Image

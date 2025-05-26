@@ -5,7 +5,8 @@ import { Text, StyleSheet } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   header: {
     fontSize: 28,
-    marginBottom: 0,
+    paddingTop:35,
+    marginBottom: -7,
     fontFamily: "Catamaran",
     fontWeight: 500,
   },

@@ -1,6 +1,3 @@
-import { createCanvas } from "canvas";
-import QRCode from "qrcode";
-
 /**
  * Formats an ISO date string (YYYY-MM-DD) to a readable German format (DD.MM.YYYY)
  * @param dateStr - ISO format date string
@@ -21,25 +18,46 @@ export function formatEventDate(dateStr: string): string {
 }
 
 /**
- * Generates a QR code as a data URL
- * @param url - The URL to encode in the QR code
- * @returns A data URL representing the QR code image
+ * Gets the weekday from an ISO date string (YYYY-MM-DD)
+ * @param dateStr - ISO format date string
+ * @returns Abbreviated weekday name in German (Mo, Di, Mi, etc.)
  */
-export async function generateQRCode(url: string): Promise<string> {
+export function getWeekday(dateStr: string): string {
   try {
-    const canvas = createCanvas(200, 200);
-    await QRCode.toCanvas(canvas, url, {
-      width: 200,
-      margin: 1,
-      color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    });
-    
-    return canvas.toDataURL();
-  } catch (error) {
-    console.error("Error generating QR code:", error);
-    throw error;
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('de-DE', { weekday: 'short' });
+  } catch (e) {
+    console.error("Invalid date format:", dateStr);
+    return '';
+  }
+}
+
+/**
+ * Gets the day number from an ISO date string (YYYY-MM-DD)
+ * @param dateStr - ISO format date string
+ * @returns Day of month as a number string
+ */
+export function getDayNumber(dateStr: string): string {
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('de-DE', { day: 'numeric' });
+  } catch (e) {
+    console.error("Invalid date format:", dateStr);
+    return '';
+  }
+}
+
+/**
+ * Gets the month name from an ISO date string (YYYY-MM-DD)
+ * @param dateStr - ISO format date string
+ * @returns Month name in German
+ */
+export function getMonthName(dateStr: string): string {
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('de-DE', { month: 'long' });
+  } catch (e) {
+    console.error("Invalid date format:", dateStr);
+    return '';
   }
 }

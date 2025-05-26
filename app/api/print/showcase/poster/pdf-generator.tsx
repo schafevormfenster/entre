@@ -1,12 +1,10 @@
 import React from "react";
 import { renderToBuffer } from "@react-pdf/renderer";
-import { ShowcasePosterDocument } from "./components/ShowcasePosterDocument";
+import { CommunityProps, ShowcasePosterDocument } from "./components/ShowcasePosterDocument";
 import { Event } from "./types";
 
 
-interface GeneratePDFProps {
-  communityName: string;
-  slug: string;
+interface GeneratePDFProps extends CommunityProps {
   events: Event[];
 }
 
@@ -16,11 +14,11 @@ interface GeneratePDFProps {
  * @returns A Promise that resolves to a Buffer containing the PDF
  */
 export async function generatePDF(props: GeneratePDFProps): Promise<Buffer> {
-  const { communityName, slug, events } = props;
+  const { community, slug, events } = props;
 
   // Create the PDF document
   const pdfDocument = <ShowcasePosterDocument 
-    communityName={communityName} 
+    community={community} 
     slug={slug} 
     events={events as Event[]} 
   />;

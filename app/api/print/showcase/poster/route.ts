@@ -22,7 +22,7 @@ export async function GET(
 
     // Generate PDF as buffer
     const pdfBuffer = await generatePDF({
-      communityName,
+      community: communityName,
       slug,
       events,
     });
@@ -72,8 +72,7 @@ function generateSampleEvents() {
     },
     {
       date: "2025-05-25",
-      time: "14:00",
-      title: "Spielplatzfest",
+      title: "Gelber Sack",
       location: "Dorfplatz",
     },
     {
@@ -81,6 +80,24 @@ function generateSampleEvents() {
       time: "09:00",
       title: "Freiwilliger Arbeitseinsatz",
       location: "Treffpunkt Feuerwehrhaus",
+    },
+    {
+      date: "2025-06-05",
+      time: "18:00",
+      title: "Kinoabend im Gemeindehaus",
+      location: "Gemeindehaus",
+    },
+    {
+      date: "2025-06-10",
+      time: "20:00",
+      title: "Bürgerforum - Ideen für die Zukunft",
+      location: "Dorfgemeinschaftshaus",
+    },
+    {
+      date: "2025-06-15",
+      time: "14:00",
+      title: "Flohmarkt auf dem Dorfplatz",
+      location: "Dorfplatz",
     },
   ];
 }

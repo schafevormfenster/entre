@@ -13,15 +13,41 @@ import path from "path"; // Add path import for file resolution
 Font.register({
   family: "Catamaran",
   fonts: [
-    { src: path.join(process.cwd(), "node_modules/@fontsource/catamaran/files/catamaran-latin-400-normal.woff"), fontWeight: 400 }, // Regular
-    { src: path.join(process.cwd(), "node_modules/@fontsource/catamaran/files/catamaran-latin-600-normal.woff"), fontWeight: 600 }, // SemiBold
+    {
+      src: path.join(
+        process.cwd(),
+        "node_modules/@fontsource/catamaran/files/catamaran-latin-400-normal.woff"
+      ),
+      fontWeight: 400,
+    }, // Regular
+    {
+      src: path.join(
+        process.cwd(),
+        "node_modules/@fontsource/catamaran/files/catamaran-latin-500-normal.woff"
+      ),
+      fontWeight: 500,
+    }, // Medium
+    {
+      src: path.join(
+        process.cwd(),
+        "node_modules/@fontsource/catamaran/files/catamaran-latin-600-normal.woff"
+      ),
+      fontWeight: 600,
+    }, // SemiBold
+    {
+      src: path.join(
+        process.cwd(),
+        "node_modules/@fontsource/catamaran/files/catamaran-latin-700-normal.woff"
+      ),
+      fontWeight: 700,
+    }, // Bold
   ],
 });
 
 // Use standard fonts for Courier New
 Font.register({
   family: "Courier New",
-  src: path.join(process.cwd(), "public/fonts/courier-new.ttf")
+  src: path.join(process.cwd(), "public/fonts/courier-new.ttf"),
 });
 
 // Define styles for the document
@@ -29,53 +55,58 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "white",
-    padding: 50,
+    padding: 60,
+    paddingTop: 20,
     paddingBottom: 10,
     fontFamily: "Catamaran",
-    
   },
   topRow: {
     flexDirection: "row",
-    height: "28%", // 1/3 of the page
-    marginBottom: 20,
+    height: "12%",
+    marginBottom: 0,
   },
   topRowLeft: {
     flex: 1,
-    paddingRight: 15,
+    paddingTop: 14,
   },
   topRowRight: {
     width: 120, // Fixed width for the partner logo
     alignItems: "flex-end",
   },
+  communityRow: {
+    height: "28%",
+    marginTop: -10,
+  },
   mainContent: {
     flexDirection: "row",
     flex: 1,
-    maxHeight: "66%", // 2/3 of the page
+    maxHeight: "57%", // 2/3 of the page
   },
   leftColumn: {
-    width: "60%",
-    paddingRight: 15,
-    
+    width: "53%",
+    marginRight: 25,
   },
   rightColumn: {
     width: "40%",
-    
   },
 });
 
-interface ShowcasePosterDocumentProps {
-  communityName: string;
+export interface CommunityProps {
+  community: string;
   slug: string;
+}
+
+interface ShowcasePosterDocumentProps extends CommunityProps {
   events: Event[];
 }
 
 /**
  * The main component for the showcase poster PDF document
  */
-export const ShowcasePosterDocument: React.FC<ShowcasePosterDocumentProps> = ({ 
-  communityName, 
-  slug, 
-  events 
+export const ShowcasePosterDocument: React.FC<ShowcasePosterDocumentProps> = ({
+  community,
+  slug,
+  events,
 }) => {
   return (
     <Document>
@@ -84,24 +115,26 @@ export const ShowcasePosterDocument: React.FC<ShowcasePosterDocumentProps> = ({
         <View style={styles.topRow}>
           <View style={styles.topRowLeft}>
             <Header />
-            <CommunityName name={communityName} />
           </View>
           <View style={styles.topRowRight}>
             <PartnerLogo />
           </View>
         </View>
-        
+        <View style={styles.communityRow}>
+          <CommunityName name={community} />
+        </View>
+
         {/* Main Content - Two Columns */}
         <View style={styles.mainContent}>
           {/* Left column with smartphone */}
           <View style={styles.leftColumn}>
-            <SmartphoneContent events={events} />
+            <SmartphoneContent events={events}  slug={slug} community={community} />
           </View>
 
           {/* Right column with QR code and information */}
           <View style={styles.rightColumn}>
-            <QrCodeSection slug={slug} />
-            <InformationText />
+            <QrCodeSection slug={slug} community={community} />
+            <InformationText slug={slug} community={community} />
           </View>
         </View>
       </Page>
