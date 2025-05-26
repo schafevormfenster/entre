@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { generatePDF } from "./pdf-generator";
 import { getGeoLocation } from "../../../../clients/geo-api/get-geo-location";
 import { GeoLocation } from "../../../../clients/geo-api/types/geo-location.types";
+import { getEventsByCommunity } from "../../../../clients/sanity/get-events-by-community";
 
 
 export const dynamic = "force-dynamic";
@@ -25,12 +26,11 @@ export async function GET(
       console.error(`Community with slug "${slug}" not found.`);
       throw new Error(`Community with slug "${slug}" not found.`);
     }
-    // TODO: get events from sanity
-
+    // Get events from sanity using the new function
     console.log(`Generating PDF for community: ${community.name} (slug: ${slug})`);
 
-    // Generate sample events if not provided (for demonstration)
-    const events = generateSampleEvents();
+    // Fetch real events from Sanity
+    const events = await getEventsByCommunity(slug);
 
     // Generate PDF as buffer
     const pdfBuffer = await generatePDF({

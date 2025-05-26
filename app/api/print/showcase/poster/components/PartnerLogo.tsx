@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     paddingTop:2,
     fontFamily: "Catamaran",
     textAlign : "right",
-    lineHeight: 1.1,
+    lineHeight: 1.3
     
   },
   logoContainer: {

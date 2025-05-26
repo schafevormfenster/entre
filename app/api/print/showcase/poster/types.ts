@@ -6,4 +6,6 @@ export interface Event {
   time?: string;
   title: string;
   location: string;
+  start?: string;
+  allday?: boolean;
 }

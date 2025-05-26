@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
+    overflow  : "hidden",
   },
   header: {
     height: 55,
@@ -55,8 +56,13 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontFamily: "Catamaran",
   },
+  list: {
+    flex: 0,
+  },
   eventItem: {
-    marginBottom: 15,
+    position: "relative",
+    marginBottom: 18,
+    minHeight: 30,
     flexDirection: "row",
   },
   eventDate: {
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
     fontFamily: "Catamaran",
   },
   eventTitle: {
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: "Catamaran",
     fontWeight: 500,
     width: "160",
@@ -200,6 +206,7 @@ export const SmartphoneContent: React.FC<SmartphoneContentProps> = ({
             https://schafe-vorm-fenster.de/{slug}
           </Text>
         </View>
+        <View style={styles.list} >
         {events.map((event, index) => (
           <View key={`event-${index}`} style={styles.eventItem}>
             <View style={styles.eventDate}>
@@ -222,6 +229,7 @@ export const SmartphoneContent: React.FC<SmartphoneContentProps> = ({
             </View>
           </View>
         ))}
+        </View>
       </View>
     </View>
   );

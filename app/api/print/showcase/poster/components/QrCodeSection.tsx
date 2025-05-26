@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   scanText: {
-    fontSize: 9,
+    fontSize: 10,
     textAlign: "left",
     fontFamily: "Catamaran",
     paddingLeft: 3,
-    marginTop:2
+    marginTop:2,
+    lineHeight: 1.3
   },
 });
 
