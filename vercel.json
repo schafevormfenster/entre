@@ -16,6 +16,11 @@
       "source": "/q/:community*"
     },
     {
+      "destination": "https://schafe-vorm-fenster.de/:community*?etcc_cmp=Showcase&etcc_med=Print",
+      "permanent": true,
+      "source": "/s/:community*"
+    },
+    {
       "destination": "https://www.gemeinde-schmatzin.de/",
       "permanent": true,
       "source": "/c/gs"
