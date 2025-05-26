@@ -17,6 +17,11 @@ export async function GET(
     const communityName: string = searchParams.get("community") || "Musterort";
     const slug: string = searchParams.get("slug") || "default";
 
+
+// TODO: get copmmunity name by slug from geo api
+// TODO: get events from sanity
+
+
     // Generate sample events if not provided (for demonstration)
     const events = generateSampleEvents();
 

@@ -3,7 +3,7 @@
  */
 export interface Event {
   date: string;
-  time: string;
+  time?: string;
   title: string;
   location: string;
 }
