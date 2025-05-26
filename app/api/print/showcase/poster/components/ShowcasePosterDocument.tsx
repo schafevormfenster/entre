@@ -128,7 +128,11 @@ export const ShowcasePosterDocument: React.FC<ShowcasePosterDocumentProps> = ({
         <View style={styles.mainContent}>
           {/* Left column with smartphone */}
           <View style={styles.leftColumn}>
-            <SmartphoneContent events={events}  slug={slug} community={community} />
+            <SmartphoneContent
+              events={events}
+              slug={slug}
+              community={community}
+            />
           </View>
 
           {/* Right column with QR code and information */}
