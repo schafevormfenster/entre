@@ -39,6 +39,10 @@ export const getGeoLocation = async (
         "Sheep-Token": config.token,
         Accept: "application/json",
       },
+      cache: "force-cache",
+      next: {
+        revalidate: 86400 // Cache for 24 hours
+      }
     });
 
     if (!response.ok) {
