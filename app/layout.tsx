@@ -11,7 +11,7 @@ export default function RootLayout({
         <title>Entré</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="p-8 border-4 min-h-screen w-full border-yellow-400">
+      <body className="">
         {children}
       </body>
     </html>

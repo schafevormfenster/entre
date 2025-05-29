@@ -11,12 +11,11 @@
   margin: 0;
 }
 
+html, body {
+  @apply p-0 m-0;
+}
 body {
   @apply text-black;
-}
-
-#react-qrcode-logo {
-  margin: auto;
 }
 
 /* https://github.com/vercel/next.js/discussions/41745#discussioncomment-3973420 */

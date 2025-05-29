@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { QRCode } from "react-qrcode-logo";
+import QRCode from "qrcode";
 
 const websiteDomain: string =
   process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || "schafe-vorm-fenster.de";
@@ -12,38 +12,37 @@ const qrCodeBasePath: string =
 
 export default function Label({ slug }: { slug: string }) {
   const qrCodeUrl: string = qrCodeBaseUrl + qrCodeBasePath + slug;
+  const [qrCodeDataUrl, setQrCodeDataUrl] = React.useState<string>("");
+
+  React.useEffect(() => {
+    QRCode.toDataURL(qrCodeUrl, {
+      width: 95,
+      margin: 2,
+      color: {
+        dark: "#000000",
+        light: "#FFFFFF"
+      },
+      errorCorrectionLevel: "M"
+    })
+      .then(url => {
+        setQrCodeDataUrl(url);
+      })
+      .catch(err => {
+        console.error("Error generating QR code:", err);
+      });
+  }, [qrCodeUrl]);
 
   return (
     <div className="relative block pt-5 text-center h-40mm w-40mm">
-      <QRCode
-        size={95}
-        value={qrCodeUrl}
-        fgColor="black"
-        qrStyle="dots"
-        // logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
-        // removeQrCodeBehindLogo={true}
-        ecLevel="M"
-        // logoHeight={20}
-        // logoWidth={20}
-        eyeRadius={[
-          {
-            // top/left eye
-            outer: [10, 3, 3, 3],
-            inner: [5, 5, 5, 5],
-          },
-          {
-            // top/right eye
-            outer: [3, 10, 3, 3],
-            inner: [5, 5, 5, 5],
-          },
-          {
-            // bottom/left
-            outer: [3, 3, 3, 10],
-            inner: [5, 5, 5, 5],
-          },
-        ]}
-        eyeColor="#222"
-      />
+      {qrCodeDataUrl && (
+        <img
+          src={qrCodeDataUrl}
+          alt={`QR Code for ${qrCodeUrl}`}
+          width={95}
+          height={95}
+          className="mx-auto"
+        />
+      )}
       {/* <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
         {websiteDomain}
       </p> */}

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { QRCode } from "react-qrcode-logo";
+import QRCode from "qrcode";
 
 const websiteDomain: string =
   process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || "schafe-vorm-fenster.de";
@@ -11,10 +11,28 @@ const qrCodeBasePath: string =   "c/";
 
 export default function QrCodeImage({ slug }: { slug: string }) {
   const qrCodeUrl: string = qrCodeBaseUrl + qrCodeBasePath + slug;
-  const qrCodeHtmlId: string = "qr-code-" + slug;
+  const [qrCodeDataUrl, setQrCodeDataUrl] = React.useState<string>("");
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    if (canvasRef.current) {
+      QRCode.toCanvas(canvasRef.current, qrCodeUrl, {
+        width: 900,
+        margin: 2,
+        color: {
+          dark: "#000000",
+          light: "#FFFFFF"
+        },
+        errorCorrectionLevel: "Q"
+      })
+        .catch(err => {
+          console.error("Error generating QR code:", err);
+        });
+    }
+  }, [qrCodeUrl]);
 
   const downloadCode = () => {
-    const canvas: any = document.getElementById(qrCodeHtmlId);
+    const canvas = canvasRef.current;
     if (canvas) {
       const pngUrl = canvas
         .toDataURL("image/png")
@@ -39,17 +57,10 @@ export default function QrCodeImage({ slug }: { slug: string }) {
         Click the qr code to download as PNG.
       </p>
       <button onClick={() => downloadCode()}>
-        <QRCode
-          id={qrCodeHtmlId}
-          size={900}
-          value={qrCodeUrl}
-          fgColor="black"
-          qrStyle="squares"
-          removeQrCodeBehindLogo={true}
-          ecLevel="Q"
-          logoHeight={200}
-          logoWidth={200}          
-          eyeColor="#000"
+        <canvas
+          ref={canvasRef}
+          className="cursor-pointer"
+          style={{ maxWidth: "100%", height: "auto" }}
         />
       </button>
     </div>

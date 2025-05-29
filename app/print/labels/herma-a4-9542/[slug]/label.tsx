@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { QRCode } from "react-qrcode-logo";
+import QRCode from "qrcode";
 
 const websiteDomain: string =
   process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || "schafe-vorm-fenster.de";
@@ -12,38 +12,37 @@ const qrCodeBasePath: string =
 
 export default function Label({ slug }: { slug: string }) {
   const qrCodeUrl: string = qrCodeBaseUrl + qrCodeBasePath + slug;
+  const [qrCodeDataUrl, setQrCodeDataUrl] = React.useState<string>("");
+
+  React.useEffect(() => {
+    QRCode.toDataURL(qrCodeUrl, {
+      width: 116,
+      margin: 2,
+      color: {
+        dark: "#000000",
+        light: "#FFFFFF"
+      },
+      errorCorrectionLevel: "Q"
+    })
+      .then(url => {
+        setQrCodeDataUrl(url);
+      })
+      .catch(err => {
+        console.error("Error generating QR code:", err);
+      });
+  }, [qrCodeUrl]);
 
   return (
     <div className="relative block pt-2 text-center h-40mm w-40mm">
-      <QRCode
-        size={116}
-        value={qrCodeUrl}
-        fgColor="black"
-        qrStyle="dots"
-        logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
-        removeQrCodeBehindLogo={true}
-        ecLevel="Q"
-        logoHeight={25}
-        logoWidth={25}
-        eyeRadius={[
-          {
-            // top/left eye
-            outer: [8, 3, 3, 3],
-            inner: [3, 3, 3, 3],
-          },
-          {
-            // top/right eye
-            outer: [3, 8, 3, 3],
-            inner: [3, 3, 3, 3],
-          },
-          {
-            // bottom/left
-            outer: [3, 3, 3, 8],
-            inner: [3, 3, 3, 3],
-          },
-        ]}
-        eyeColor="#111"
-      />
+      {qrCodeDataUrl && (
+        <img
+          src={qrCodeDataUrl}
+          alt={`QR Code for ${qrCodeUrl}`}
+          width={116}
+          height={116}
+          className="mx-auto"
+        />
+      )}
       {/* <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
         {websiteDomain}
       </p> */}

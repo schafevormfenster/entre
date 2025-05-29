@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { QRCode } from "react-qrcode-logo";
+import QRCode from "qrcode";
 
 const websiteDomain: string =
   process.env.NEXT_PUBLIC_WEBSITE_DOMAIN || "schafe-vorm-fenster.de";
@@ -12,10 +12,27 @@ const qrCodeBasePath: string =
 
 export default function QrCodeImage({ slug }: { slug: string }) {
   const qrCodeUrl: string = qrCodeBaseUrl + qrCodeBasePath + slug;
-  const qrCodeHtmlId: string = "qr-code-" + slug;
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    if (canvasRef.current) {
+      QRCode.toCanvas(canvasRef.current, qrCodeUrl, {
+        width: 900,
+        margin: 2,
+        color: {
+          dark: "#000000",
+          light: "#FFFFFF"
+        },
+        errorCorrectionLevel: "Q"
+      })
+        .catch(err => {
+          console.error("Error generating QR code:", err);
+        });
+    }
+  }, [qrCodeUrl]);
 
   const downloadCode = () => {
-    const canvas: any = document.getElementById(qrCodeHtmlId);
+    const canvas = canvasRef.current;
     if (canvas) {
       const pngUrl = canvas
         .toDataURL("image/png")
@@ -40,35 +57,10 @@ export default function QrCodeImage({ slug }: { slug: string }) {
         Click the qr code to download as PNG.
       </p>
       <button onClick={() => downloadCode()}>
-        <QRCode
-          id={qrCodeHtmlId}
-          size={900}
-          value={qrCodeUrl}
-          fgColor="black"
-          qrStyle="dots"
-          logoImage="/Schafe-vorm-Fenster-UG_Logo.png"
-          removeQrCodeBehindLogo={true}
-          ecLevel="Q"
-          logoHeight={200}
-          logoWidth={200}
-          eyeRadius={[
-            {
-              // top/left eye
-              outer: [10, 3, 3, 3],
-              inner: [5, 5, 5, 5],
-            },
-            {
-              // top/right eye
-              outer: [3, 10, 3, 3],
-              inner: [5, 5, 5, 5],
-            },
-            {
-              // bottom/left
-              outer: [3, 3, 3, 10],
-              inner: [5, 5, 5, 5],
-            },
-          ]}
-          eyeColor="#222"
+        <canvas
+          ref={canvasRef}
+          className="cursor-pointer"
+          style={{ maxWidth: "100%", height: "auto" }}
         />
       </button>
     </div>
