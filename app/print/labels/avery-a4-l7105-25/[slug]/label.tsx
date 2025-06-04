@@ -22,7 +22,7 @@ export default function Label({ slug }: { slug: string }) {
         dark: "#000000",
         light: "#FFFFFF"
       },
-      errorCorrectionLevel: "M"
+      errorCorrectionLevel: "Q"
     })
       .then(url => {
         setQrCodeDataUrl(url);
@@ -46,7 +46,7 @@ export default function Label({ slug }: { slug: string }) {
       {/* <p className="absolute block w-full leading-tight text-center text-black text-xxs top-5 font-title">
         {websiteDomain}
       </p> */}
-      <div className="absolute block w-full text-center top-34mm">
+      <div className="absolute block w-full text-center top-32mm">
         <p className="relative block w-2/3 mx-auto leading-none text-center text-black whitespace-normal text-s font-title">
           {slug.replaceAll("-", "‐")}
         </p>
